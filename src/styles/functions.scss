@@ -1,0 +1,11 @@
+@function px2rem($px) {
+  @return #{($px / $font-size) + 'rem'};
+}
+
+@function invertTextColor($color) {
+  @if (lightness($color) > 47) {
+    @return $black-color;
+  } @else {
+    @return $white-color;
+  }
+}

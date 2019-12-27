@@ -1,0 +1,53 @@
+#page {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100%;
+}
+
+#page-top-bar {
+  height: $top-bar-height;
+  background-color: $primary-color;
+  color: invertTextColor($primary-color);
+  box-shadow: 0 0 8px $box-shadow-color;
+  display: flex;
+  align-items: center;
+  font-size: px2rem(22px);
+  padding: 0 $page-padd-h;
+}
+
+#page-bottom-bar {
+  height: $bottom-bar-height;
+  background-color: $white-color;
+  color: $black-color;
+  box-shadow: 0 0 6px 0 rgba($box-shadow-color, 0.25);
+  display: flex;
+
+  > a {
+    flex: 1 1 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: px2rem(18px);
+    color: $gray-800;
+    -webkit-tap-highlight-color: rgba($gray-200, 0.1);
+
+    &.router-link-exact-active {
+      color: $primary-color;
+    }
+
+    &:focus,
+    &:hover,
+    &:active {
+      outline: none;
+      background-color: $gray-100;
+    }
+  }
+}
+
+#page-content {
+  flex: 1;
+  width: 100%;
+  overflow: auto;
+}

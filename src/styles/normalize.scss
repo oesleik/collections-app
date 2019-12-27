@@ -1,0 +1,11 @@
+@import 'normalize-scss';
+@include normalize();
+
+html, body, #app {
+  height: 100%;
+  position: relative;
+}
+
+body {
+  font-size: $font-size;
+}

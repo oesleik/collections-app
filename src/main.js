@@ -7,6 +7,14 @@ import i18n from './i18n'
 
 Vue.config.productionTip = false
 
+const requireComponent = require.context('./components/core', false, /[A-Z]\w+\.(vue|js)$/)
+
+requireComponent.keys().forEach(fileName => {
+  const componentConfig = requireComponent(fileName)
+  const componentName = fileName.split('/').pop().replace(/\.\w+$/, '')
+  Vue.component(componentName, componentConfig.default || componentConfig)
+})
+
 new Vue({
   router,
   store,
