@@ -1,5 +1,5 @@
 <template>
-  <li class="c-simple-list-item">
+  <li class="c-simple-list-item" @click="$emit('click')">
     <slot></slot>
   </li>
 </template>

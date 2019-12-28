@@ -13,6 +13,11 @@ const routes = [
     component: Collections
   },
   {
+    path: '/collections/:id',
+    name: 'collection',
+    component: () => import(/* webpackChunkName: "collection" */ '../views/Collection.vue')
+  },
+  {
     path: '/next',
     name: 'next',
     component: () => import(/* webpackChunkName: "next" */ '../views/Next.vue')

@@ -1,6 +1,6 @@
 <template>
   <div id="page-bottom-bar">
-    <router-link to="/">
+    <router-link to="/collections">
       <FAIcon :icon="['far', 'album-collection']"></FAIcon>
     </router-link>
     <router-link to="/next">
@@ -33,7 +33,7 @@
     color: $gray-800;
     -webkit-tap-highlight-color: rgba($gray-200, 0.1);
 
-    &.router-link-exact-active {
+    &.router-link-active {
       color: $primary-color;
     }
 

@@ -1,33 +1,21 @@
 import waitFor from '@/utils/waitFor'
+import collectionsMock from '@/models/collectionsMock'
 
 const consts = {
   sort: {
     RECENT: Symbol('recent'),
     OLDEST: Symbol('oldest'),
     NAME: Symbol('name')
+  },
+  errors: {
+    NOT_FOUND: Symbol('not_found')
   }
 }
 
-function getAll (filters = { collectionId: 0 }, sort = consts.sort.RECENT) {
-  return waitFor(1000).then(() => {
-    return {
-      id: 1,
-      name: 'Mangás',
-      items: [
-        {
-          id: 1,
-          name: 'Solo Leveling'
-        },
-        {
-          id: 2,
-          name: 'The Last Human'
-        },
-        {
-          id: 3,
-          name: 'One Piece'
-        }
-      ]
-    }
+function getAll (collectionId, filters = {}, sort = consts.sort.RECENT) {
+  return waitFor(1200).then(() => {
+    const collection = collectionsMock.find(({ id }) => id === collectionId)
+    return collection ? collection.items : Promise.reject(consts.errors.NOT_FOUND)
   })
 }
 
