@@ -1,6 +1,8 @@
 <template>
   <Page :title="$t('title')" page-name="recent">
-    <h1>This is an about page</h1>
+    <div class="page-padd">
+      Not implemented yet
+    </div>
   </Page>
 </template>
 
