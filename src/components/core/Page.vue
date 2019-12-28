@@ -18,3 +18,18 @@ export default {
   props: ['title', 'loading']
 }
 </script>
+
+<style lang="scss">
+#page {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100%;
+}
+
+#page-content {
+  flex: 1;
+  width: 100%;
+  overflow: auto;
+}
+</style>

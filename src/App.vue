@@ -5,5 +5,5 @@
 </template>
 
 <style lang="scss">
-  @import '@/main'
+@import '@/main'
 </style>
