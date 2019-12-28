@@ -2,12 +2,7 @@
   <div id="page">
     <PageTopBar :title="title" />
     <div id="page-content">
-      <div v-if="loading">
-        Carregando...
-      </div>
-      <template v-else>
-        <slot></slot>
-      </template>
+      <slot></slot>
     </div>
     <PageBottomBar />
   </div>
@@ -15,7 +10,7 @@
 
 <script>
 export default {
-  props: ['title', 'loading']
+  props: ['title']
 }
 </script>
 
@@ -31,5 +26,19 @@ export default {
   flex: 1;
   width: 100%;
   overflow: auto;
+}
+
+.page-padd {
+  padding: $page-padd-v $page-padd-h;
+}
+
+.page-padd-v {
+  padding-top: $page-padd-v;
+  padding-bottom: $page-padd-v;
+}
+
+.page-padd-h {
+  padding-left: $page-padd-h;
+  padding-right: $page-padd-h;
 }
 </style>
