@@ -1,45 +1,39 @@
 <template>
   <Page :title="$t('title')" page-name="collections">
-    <div class="page-padd s-loading" v-if="loading">
-      {{ $t('loading') }}
-    </div>
-    <SimpleList v-else>
-      <SimpleListItem v-for="item of items" :key="item.id" @click="$router.push(`/collections/${item.id}`)">
-        {{ item.name }}
-      </SimpleListItem>
-    </SimpleList>
+    <Promised :promise="collectionsPromise">
+      <template #pending>
+        <div class="page-padd flex-centered">
+          {{ $t('loading') }}
+        </div>
+      </template>
+
+      <SimpleList v-if="collections.length">
+        <SimpleListItem v-for="collection of collections" :key="collection.id" @click="$router.push(`/collections/${collection.id}`)">
+          {{ collection.name }}
+        </SimpleListItem>
+      </SimpleList>
+
+      <div v-else class="page-padd flex-centered">
+        {{ $t('emptyMessage') }}
+      </div>
+    </Promised>
   </Page>
 </template>
 
 <script>
-import { getAll as getCollections } from '@/models/collections'
+import { db } from '@/db'
 import SimpleList from '@/components/SimpleList'
 import SimpleListItem from '@/components/SimpleListItem'
 
 export default {
   data () {
     return {
-      loading: false,
-      items: []
+      collections: [],
+      collectionsPromise: null
     }
   },
   created () {
-    this.fetchData()
-  },
-  methods: {
-    fetchData () {
-      this.loading = true
-
-      getCollections().then((items) => {
-        this.items = items
-        // for (let i = 0; i < 20; i++) {
-        //   this.items.push(Object.assign({}, this.items[0]))
-        // }
-        // this.items[0].name = 'Primeiro'
-        // this.items[this.items.length - 1].name = 'ultimo'
-        this.loading = false
-      })
-    }
+    this.collectionsPromise = this.$bind('collections', db.collection('collections'))
   },
   components: {
     SimpleList,
@@ -48,25 +42,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.s-loading {
-  font-size: px2rem(20px);
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-</style>
-
 <i18n>
 {
   "pt-BR": {
     "title": "Coleções",
-    "loading": "Carregando"
+    "loading": "Carregando",
+    "emptyMessage": "Nenhum coleção encontrada"
   },
   "en": {
     "title": "Collections",
-    "loading": "Loading"
+    "loading": "Loading",
+    "emptyMessage": "No collections found"
   }
 }
 </i18n>

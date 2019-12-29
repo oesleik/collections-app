@@ -7,9 +7,12 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    redirect: '/collections'
+  },
+  {
     path: '/collections',
     name: 'collections',
-    alias: '/',
     component: Collections
   },
   {

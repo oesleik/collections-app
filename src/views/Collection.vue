@@ -1,51 +1,47 @@
 <template>
-  <Page :title="name || $t('title')" page-name="collection">
-    <div class="page-padd s-loading" v-if="loading">
-      {{ $t('loading') }}
-    </div>
-    <SimpleList v-else>
-      <SimpleListItem v-for="item of items" :key="item.id">
-        {{ item.name }}
-      </SimpleListItem>
-    </SimpleList>
+  <Page :title="collection ? collection.name : $t('title')" page-name="collection">
+    <Promised :promise="collectionItemsPromise">
+      <template #pending>
+        <div class="page-padd flex-centered">
+          {{ $t('loading') }}
+        </div>
+      </template>
+
+      <SimpleList v-if="collectionItems.length">
+        <SimpleListItem v-for="item of collectionItems" :key="item.id">
+          {{ item.name }}
+        </SimpleListItem>
+      </SimpleList>
+
+      <div v-else class="page-padd flex-centered">
+        {{ $t('emptyMessage') }}
+      </div>
+    </Promised>
   </Page>
 </template>
 
 <script>
-import { get as getCollection } from '@/models/collections'
-import { getAll as getItems } from '@/models/collection'
+import { db } from '@/db'
 import SimpleList from '@/components/SimpleList'
 import SimpleListItem from '@/components/SimpleListItem'
 
 export default {
   data () {
     return {
-      loading: false,
-      id: 0,
-      name: '',
-      items: []
+      collectionId: 0,
+      collection: null,
+      collectionItems: [],
+      collectionItemsPromise: null
     }
   },
   created () {
-    this.fetchData()
-  },
-  methods: {
-    fetchData () {
-      this.loading = true
-      this.id = parseInt(this.$route.params.id)
+    this.collectionId = this.$route.params.id
 
-      Promise.all([
-        getCollection(this.id).then((collection) => {
-          this.name = collection.name
-        }),
-        getItems(this.id).then((items) => {
-          this.items = items
-        })
-      ]).then(() => {
-        console.log('alow')
-        this.loading = false
-      })
-    }
+    const collectionDoc = db.collection('collections').doc(this.collectionId)
+    const collectionItemsDocs = db.collection('collectionItems').where('collection', '==', collectionDoc)
+
+    this.$bind('collection', collectionDoc)
+    this.collectionItemsPromise = this.$bind('collectionItems', collectionItemsDocs)
   },
   components: {
     SimpleList,
@@ -54,25 +50,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.s-loading {
-  font-size: px2rem(20px);
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-</style>
-
 <i18n>
 {
   "pt-BR": {
     "title": "Coleção",
-    "loading": "Carregando"
+    "loading": "Carregando",
+    "emptyMessage": "Nenhum item encontrado"
   },
   "en": {
     "title": "Collection",
-    "loading": "Loading"
+    "loading": "Loading",
+    "emptyMessage": "No items found"
   }
 }
 </i18n>
