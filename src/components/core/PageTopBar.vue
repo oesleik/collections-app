@@ -1,12 +1,20 @@
 <template>
   <div id="page-top-bar">
     {{ title }}
+    <span style="margin-left: auto;" @click="changeLanguage">
+      <FaIcon :icon="['fal', 'language']"></FaIcon>
+    </span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['title']
+  props: ['title'],
+  methods: {
+    changeLanguage () {
+      this.$i18n.locale = this.$i18n.locale === 'pt-BR' ? 'en' : 'pt-BR'
+    }
+  }
 }
 </script>
 

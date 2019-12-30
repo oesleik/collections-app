@@ -56,7 +56,7 @@ export default {
       return db.collection('collectionItems')
     },
     newCollectionItem () {
-      const name = prompt(this.$t('newCollectionItemLabel'))
+      const name = prompt(this.$t('newCollectionItemLabel')) || ''
       const collectionDoc = this.getCollectionsDb().doc(this.collectionId)
 
       if (name.length) {

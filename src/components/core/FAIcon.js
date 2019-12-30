@@ -12,7 +12,8 @@ import {
 
 import {
   faPlus as falPlus,
-  faTrashAlt as falTrashAlt
+  faTrashAlt as falTrashAlt,
+  faLanguage as falLanguage
 } from '@fortawesome/pro-light-svg-icons'
 
 library.add(
@@ -24,7 +25,8 @@ library.add(
 
   // light
   falPlus,
-  falTrashAlt
+  falTrashAlt,
+  falLanguage
 )
 
 export default FontAwesomeIcon

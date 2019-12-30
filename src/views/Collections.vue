@@ -48,7 +48,7 @@ export default {
       return db.collection('collectionItems')
     },
     newCollection () {
-      const name = prompt(this.$t('newCollectionLabel'))
+      const name = prompt(this.$t('newCollectionLabel')) || ''
 
       if (name.length) {
         this.getCollectionsDb().add({ name })
