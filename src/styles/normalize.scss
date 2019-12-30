@@ -10,6 +10,6 @@ html, body, #app {
   position: relative;
 }
 
-body {
-  font-size: $font-size;
+html, body {
+  font-size: $body-font-size;
 }

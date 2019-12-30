@@ -1,5 +1,5 @@
 @function px2rem($px) {
-  @return #{($px / $font-size) + 'rem'};
+  @return #{($px / $base-font-size) + 'rem'};
 }
 
 @function invertTextColor($color) {

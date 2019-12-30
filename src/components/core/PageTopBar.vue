@@ -12,13 +12,13 @@ export default {
 
 <style lang="scss">
 #page-top-bar {
-  height: $top-bar-height;
+  height: px2rem($top-bar-height);
   background-color: $primary-color;
   color: invertTextColor($primary-color);
   box-shadow: 0 0 8px 1px rgba($box-shadow-color, 0.6);
   display: flex;
   align-items: center;
   font-size: px2rem(22px);
-  padding: 0 $page-padd-h;
+  padding: 0 px2rem($page-padd-h);
 }
 </style>

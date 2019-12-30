@@ -6,8 +6,8 @@
 
 <style lang="scss">
 .c-simple-list-item {
-  padding: 15px $page-padd-h;
-  border-bottom: 1px solid $border-color;
+  padding: px2rem(15px) px2rem($page-padd-h);
+  border-bottom: px2rem(1px) solid $border-color;
 
   &:last-child {
     border-bottom: none;

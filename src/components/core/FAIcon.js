@@ -10,11 +10,21 @@ import {
   faCog as farCog
 } from '@fortawesome/pro-regular-svg-icons'
 
+import {
+  faPlus as falPlus,
+  faTrashAlt as falTrashAlt
+} from '@fortawesome/pro-light-svg-icons'
+
 library.add(
+  // regular
   farAlbumCollection,
   farSparkles,
   farHistory,
-  farCog
+  farCog,
+
+  // light
+  falPlus,
+  falTrashAlt
 )
 
 export default FontAwesomeIcon
